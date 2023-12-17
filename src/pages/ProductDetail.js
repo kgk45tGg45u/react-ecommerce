@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
+import { useTitle } from "../hooks/useTitle";
 import { useParams } from "react-router-dom";
 import { Rating } from "../components";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  
+  useTitle(product.name)
+
   useEffect(() => {
     async function fetchProducts(){
       const response = await fetch(`http://localhost:8000/products/${id}`);
@@ -29,7 +31,7 @@ export const ProductDetail = () => {
                 <span className="mr-1">$</span>
                 <span className="">{product.price}</span>
               </p>
-              <p className="my-3"> 
+              <p className="my-3">
                 <span>
                   <Rating rating={product.rating} />
                 </span>
@@ -50,6 +52,6 @@ export const ProductDetail = () => {
             </div>
           </div>
         </section>
-      </main> 
+      </main>
   )
 }
